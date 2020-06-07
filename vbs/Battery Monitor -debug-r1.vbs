@@ -9,15 +9,13 @@ set oResults = oServices.ExecQuery("select * from batteryfullchargedcapacity")
 for each oResult in oResults
     iFull = oResult.FullChargedCapacity
 next
-while (1)
-    set oResults = oServices.ExecQuery("select * from batterystatus")
-    for each oResult in oResults
-        iRemaining = oResult.RemainingCapacity
-        Discharging = oResult.Discharging
-    next
-    iPercent = ((iRemaining / iFull) * 10000) \ 100
-    if Discharging and (iPercent < 30) then 
-        MsgBox "Battery is at " & iPercent & "%",vbInformation, "Battery monitor"
-    end if
-    wscript.sleep 30000 ' 5 minutes
-wend
+
+set oResults = oServices.ExecQuery("select * from batterystatus")
+for each oResult in oResults
+    iRemaining = oResult.RemainingCapacity 
+    Discharging = oResult.Discharging
+next
+iPercent = ((iRemaining / iFull) * 10000) \ 100
+'if Discharging and (iPercent < 30) Then
+    msgbox "Battery is at " & iPercent & "% "& vbNewLine & FormatDateTime(Now()) & ".",vbInformation, "Battery monitor"
+'end if
