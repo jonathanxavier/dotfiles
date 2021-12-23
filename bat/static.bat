@@ -1,1 +1,1 @@
-netsh interface ipv4 set address name="Local Area Connection" static %* 255.255.255.0
+netsh interface ipv4 set address name="Ethernet" static %* 255.255.255.0
